@@ -3,8 +3,8 @@
 This is my solution to a challenge we were set at Makers Academy - to build a clone of Yelp using Rails.
 
 #Setup
-1. clone this repo
-2. install `postgresql`
+1. Clone this repo
+2. Install `postgresql`
 3. Run `bundle update`
 4. Run `bundle install`
 
