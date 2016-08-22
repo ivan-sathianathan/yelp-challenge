@@ -24,10 +24,7 @@ feature 'restaurant' do
     context 'when a user is signed in'
       scenario 'prompt a user to fill out a form, the display the new restaurant' do
         sign_in
-        visit '/restaurants'
-        click_link 'Add a restaurant!'
-        fill_in 'Name', with: 'KFC'
-        click_button 'Create Restaurant'
+        add_restaurant
         expect(page).to have_content 'KFC'
         expect(current_path).to eq '/restaurants'
       end
@@ -54,7 +51,7 @@ feature 'restaurant' do
   end
 
   context 'viewing restaurants' do
-    let!(:kfc){Restaurant.create(name: 'KFC')}
+    let!(:kfc) { Restaurant.create(name: 'KFC') }
     scenario 'lets a user view a restaurant' do
       visit '/restaurants'
       click_link 'KFC'

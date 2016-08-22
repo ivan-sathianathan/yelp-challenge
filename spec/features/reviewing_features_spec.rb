@@ -7,6 +7,15 @@ feature 'Reviewing' do
     create_review(thoughts: "Good", rating: 4)
   end
 
+  scenario 'Allows a user to see the time elapsed since review posted' do
+    restaurant = Restaurant.all.last
+    review = restaurant.reviews.last
+    review.created_at = DateTime.now - 50
+    review.save
+    visit('/')
+    expect(page).to have_content 'about 2 months ago' 
+  end
+
   scenario 'Allows a signed in user to review a restaurant using a form' do
     expect(current_path).to eq '/restaurants'
     expect(page).to have_content 'Good'
@@ -41,6 +50,6 @@ feature 'Reviewing' do
     sign_out
     sign_in(email: 'test2@test.com', password: 'password')
     create_review(thoughts: 'Bad', rating: 2)
-    expect(page).to have_content 'Average rating: 3'
+    expect(page).to have_content('Average Rating: ★★★☆☆')
   end
 end
